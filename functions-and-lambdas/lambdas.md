@@ -241,7 +241,7 @@ function literal 的调用就好像它是接收者对象的一个方法：
 val sum = fun Int.(other: Int): Int = this + other
 ```
 
-// TODO
+A non-literal value of a function-with-receiver type can also be assigned or passed as an argument where an ordinary function is expected that has an additional first parameter of the receiver type, and vice versa. For example, the types String.(Int) -> Boolean and (String, Int) -> Boolean are compatible:
 
 ```kotlin
 val represents: String.(Int) -> Boolean = { other -> toIntOrNull() == other }
@@ -254,6 +254,7 @@ testOperation(represents, "100", 100, true) // OK
 ```
 
 > 上例中，`represents` 是一个类型为 `String.(Int) -> Boolean` 的 lambda 变量。
+
 > 它的值是 `{ other -> toIntOrNull() == other }`：
 >   * 大括号表示 lambda 的定义
 >   * lambda 的 receiver object 的类型是 `String`
