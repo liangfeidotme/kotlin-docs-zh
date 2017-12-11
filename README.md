@@ -2,7 +2,7 @@
     * [基本类型](basics/basic-types.md)
     * [包和导入](basics/packages-and-imports.md)
     * [控制流](basics/control-flow.md)
-    * [返回和跳转](basics/return-and-jumps.md)
+    * [返回和跳转](basics/returns-and-jumps.md)
 * 类和对象
     * [类和继承](classes-and-objects/classes-and-inheritance.md)
     * [属性和字段](classes-and-objects/properties-and-fields.md)
