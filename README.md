@@ -45,8 +45,8 @@
     * [语法](reference/grammer.md)
     * [兼容性](reference/compatibility.md)
 * Java互操作
-    * [Kotlin调Java](calling-java-from-kotlin.md)
-    * [Java调Kotlin](calling-kotlin-from-java.md)
+    * [Kotlin调Java](java-interop/calling-java-from-kotlin.md)
+    * [Java调Kotlin](java-interop/calling-kotlin-from-java.md)
 * JavaScript
     * [动态类型](javascript/dynamic-type.md)
     * [Kotlin调用JavaScript](javascript/calling-javascript-from-kotlin.md)
