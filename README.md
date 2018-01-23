@@ -1,3 +1,8 @@
+Kotlin 中文文档
+===
+
+> 文档地址：https://kotlinlang.org/docs/reference/
+
 * 基础
     * [基本类型](basics/basic-types.md)
     * [包和导入](basics/packages-and-imports.md)
@@ -9,7 +14,7 @@
     * [接口](classes-and-objects/interfaces.md)
     * [-可见性修饰符](classes-and-objects/visibility-modifiers.md)
     * [扩展](classes-and-objects/extensions.md)
-    * [-数据类](classes-and-objects/data-classes.md)
+    * [数据类](classes-and-objects/data-classes.md)
     * [密封类](classes-and-objects/sealed-classes.md)
     * [泛型](classes-and-objects/generics.md)
     * [-嵌套类](classes-and-objects/nested-classes.md)
