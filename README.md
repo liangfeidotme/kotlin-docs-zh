@@ -7,7 +7,7 @@
     * [类和继承](classes-and-objects/classes-and-inheritance.md)
     * [属性和字段](classes-and-objects/properties-and-fields.md)
     * [接口](classes-and-objects/interfaces.md)
-    * [可视化修饰符](classes-and-objects/visibility-modifiers.md)
+    * [可见性修饰符](classes-and-objects/visibility-modifiers.md)
     * [扩展](classes-and-objects/extensions.md)
     * [数据类](classes-and-objects/data-classes.md)
     * [密封类](classes-and-objects/sealed-classes.md)
