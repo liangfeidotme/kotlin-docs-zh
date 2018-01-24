@@ -15,16 +15,16 @@ Kotlin 中文文档
 * [类和继承](classes-and-objects/classes-and-inheritance.md)
 * [属性和字段](classes-and-objects/properties-and-fields.md)
 * [接口](classes-and-objects/interfaces.md)
-* [-可见性修饰符](classes-and-objects/visibility-modifiers.md)
+* [可见性修饰符](classes-and-objects/visibility-modifiers.md)
 * [扩展](classes-and-objects/extensions.md)
 * [数据类](classes-and-objects/data-classes.md)
 * [密封类](classes-and-objects/sealed-classes.md)
 * [泛型](classes-and-objects/generics.md)
-* [-嵌套类](classes-and-objects/nested-classes.md)
-* [-枚举类](classes-and-objects/enum-classes.md)
+* [嵌套类](classes-and-objects/nested-classes.md)
+* [枚举类](classes-and-objects/enum-classes.md)
 * [对象](classes-and-objects/objects.md)
-* [-代理](classes-and-objects/delegation.md)
-* [-代理的属性](classes-and-objects/delegated-properties.md)
+* [代理](classes-and-objects/delegation.md)
+* [代理的属性](classes-and-objects/delegated-properties.md)
 
 函数和Lambda
 ---
