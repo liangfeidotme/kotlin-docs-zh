@@ -1,6 +1,4 @@
-包名
-===
-
+# 包名
 源文件的开头可以是 package 的声明：
 
 ```kotlin
@@ -18,9 +16,7 @@ class Goo {}
 package 没有指明的情况下，文件的内容归属于一个无名的“默认” package。
 
 
-默认导入
----
-
+## 默认导入
 每一个 kotlin 文件都会默认导入一些 package：
 
 - `kotlin.*`
@@ -40,11 +36,10 @@ package 没有指明的情况下，文件的内容归属于一个无名的“默
 - JS:
     - `kotlin.js.*`
 
-导入
----
-默认的导入之外，每个文件都有自己的导入指令。
+## 导入
+除了默认的导入之外，每个文件都有自己的导入指令。
 
-既可以只导入一个名称：
+可以只导入一个简单的名字：
 
 ```kotlin
 import foo.Bar // Bar is now accessible without qulification
@@ -63,15 +58,14 @@ import foo.Bar // Bar is accessible
 import bar.Bar as bBar // bBar stands for `bar.Bar`
 ```
 
-`import` 关键字并不仅限于导入类；还可以导入下面的声明：
+`import` 并不仅限于导入类；还可以导入其他声明：
 
 - 顶层函数和属性；
-- 对象声明中定义的函数和属性
-- 枚举常量
+- 对象声明中定义的函数和属性；
+- 枚举常量；
 
-与 Java 不同，Kotlin 没有一个额外的 `import static` 预发；所有的声明都是由常规的 `import` 来导入。
+与 Java 不同，Kotlin 没有额外的 `import static` 语法；所有的声明都是由常规的 `import` 来导入。
 
-顶层声明的可见性
----
+## 顶层（Top-level）声明的可见性
 标记为 `private` 的顶层声明只属于它所在的文件。
 
