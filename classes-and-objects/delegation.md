@@ -1,5 +1,7 @@
 # 代理
 
+> https://kotlinlang.org/docs/reference/delegation.html
+
 ## 类代理
 
 [代理模式](https://en.wikipedia.org/wiki/Delegation_pattern)已经被证明是一个继承实现（implementation inheritance）的好方法，Kotlin 无需其他代码，原生支持。`Derived` 类可以继承 `Base` 接口，然后把它的 public 方法都代理到一个指定对象上：
