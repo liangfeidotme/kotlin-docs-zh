@@ -1,11 +1,7 @@
-控制流：if, when, for, white
-===
+# 控制流：if, when, for, while
 
-if 表达式
----
-
-Kotlin 的 `if` 是一个表达式，也就是说，它有返回值。因此三元操作符（condition ? then : else）就失去用武之地了，因为普通 `if` 就可以担当此任。
-
+## if 表达式
+Kotlin 的 `if` 是一个**表达式**，也就是说，它可以返回一个值。因此三元操作符（condition ? then : else）就失去用武之地了，因为普通 `if` 就可以担当此任。
 
 ```kotlin
 // Traditional usage
@@ -38,9 +34,8 @@ val max = if (a > b) {
 
 如果把 `if` 用作表达式而不是声明的话（例如，返回它的值或者把它赋给其他变量），这个表达式需要一个 `else` 分支。
 
-when 表达式
----
-`when` 取代了 switch 操作符（比如 C 语言）。最简单的形式：
+## when 表达式
+`when` 取代了 switch 操作符（比如 C 语言）。最简单的形式如下：
 
 ```kotlin
 when (x) {
@@ -52,11 +47,11 @@ when (x) {
 }
 ```
 
-`when` 会把参数按顺序去匹配所有分支，直到某个满足某个分支条件。`when` 可以是表达式，也可以是声明。如果是表达式，满足条件的分支的值就成为整个表达式的值。如果是声明，单个分支的值会被忽略。（类似 `if`，每个分支都可以是 block，block 中最后一个表达式的值才是它的值）。
+`when` 会把参数按顺序去匹配所有分支，直到找到满足条件的分支。`when` 可以是表达式，也可以是声明。如果是表达式，满足条件的分支的值就成为整个表达式的值。如果是声明，每个分支的值会被忽略。（类似 `if`，每个分支都可以是 block，block 中最后一个表达式的值才是它的值）。
 
-`else` 在其他分支条件无法成立时会被执行。如果 `when` 用作表达式，那么 `else` 是强制要求，除非编译器能够验证所有的分支条件都被覆盖到了。
+`else` 在其他分支条件不被满足时会执行。如果 `when` 用作表达式，那么 `else` 分支是必须要有的，除非编译器能够验证所有的分支条件都被覆盖到了。
 
-如果多个分支的处理方式一致，可以用逗号把分支条件联合起来：
+如果多个 case 的处理方式一样，可以用逗号把分支条件联合起来：
 
 ```kotlin
 when (x) {
@@ -85,8 +80,7 @@ when (x) {
 }
 ```
 
-还可以用 `is` 或者 `!is` 来做类型判断。因为有 smart cast，所以无需显示的类型转换：
-
+还可以用 `is` 或者 `!is` 来做类型判断。因为有智能类型转换（smart cast），所以无需显示的类型转换：
 
 ```kotlin
 fun hasPrefix(x: Any) = when(x) {
@@ -95,7 +89,7 @@ fun hasPrefix(x: Any) = when(x) {
 }
 ```
 
-`when` 也可以取代 `if-else-if` 链。如果 `when` 没有参数，那么分支条件只是布尔表达式，当条件满足时，分支就会被执行。
+`when` 也可以取代 `if-else-if`。如果 `when` 没有参数，那么分支条件只是布尔表达式，当条件满足时，分支就会被执行。
 
 ```kotlin
 when {
@@ -105,15 +99,14 @@ when {
 }
 ```
 
-for 循环
----
+## for 循环
 只要提供了迭代器，`for` 循环就可以遍历。类似 C# 的 `foreach`。语法如下：
 
 ```kotlin
 for (item in collection) print(item)
 ```
 
-body 可以是 block：
+body 也可以是 block：
 
 ```kotlin
 for (item: Int in ints) {
@@ -129,7 +122,7 @@ for (item: Int in ints) {
 
 以上三个函数需要使用 `operator` 来标记。
 
-作用域数组的 `for` 循环会编译成一个基于索引（index-based）的循环，所以不会创建迭代器。
+作用于数组的 `for` 循环会被编译成一个基于索引（index-based）的循环，所以不会创建迭代器。
 
 利用索引遍历数组的方式如下：
 
@@ -139,7 +132,7 @@ for (i in array.indices) {
 }
 ```
 
-注意，“区域的遍历（iteration through a range）”会做最佳优化，并不会借助额外对象。
+注意，“区域的迭代（iteration through a range）”会做最佳优化，并不会产生额外对象。
 
 另外，`withIndex` 是一个库函数：
 
@@ -149,13 +142,11 @@ for ((index, value) in array.withIndex()) {
 }
 ```
 
-while 循环
----
-
+## while 循环
 `while` 和 `do..while` 的用法没有不同：
 
 ```kotlin
-while (x > ) {
+while (x > 0) {
     x--
 }
 
@@ -164,7 +155,5 @@ do {
 } while (y != null) // y is visible here!
 ```
 
-循环中的 break 和 continue
----
-
+## 循环中的 break 和 continue
 Kotlin 也支持传统的 `break` 和 `continue`。具体可见[返回和跳转](returns-and-jumps.md)
