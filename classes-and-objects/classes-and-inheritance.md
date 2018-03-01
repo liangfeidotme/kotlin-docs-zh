@@ -1,39 +1,35 @@
 # 类和继承
-
 ## 类
-
-使用关键字 `class` 来定义类：
+Kotlin 的类使用关键字 `class` 来定义：
 
 ```kotlin
 class Invoice {
 }
 ```
 
-类的声明包含：类名、类头（包括类型参数、首要构造函数等）、类体（由圆括号包裹）。类头和类体都是可选的；如果没有类体，圆括号也可以省略。
+类的声明包含：类名、类头（指明类型参数、首要构造器等）、类体（由花括号包裹）。类头和类体都是可选的；如果没有类体，花括号也可以省略。
 
 ```kotlin
 class Empty
 ```
 
 ### 构造器
-
-类可以有一个**首要构造函数**和多个**次要构造函数**。首要构造函数是类头的一部分：位于类名（以及可选类型参数）之后。
+Kotlin 的一个类可以有一个**首要构造器**和多个**次要构造器**。首要构造器是类头的一部分：位于类名（以及可选类型参数）之后。
 
 ```kotlin
 class Person constructor(firstName: String) {
 }
 ```
 
-如果首要构造函数没有 annotation 或者可视化修饰符，`constructor` 关键字可以省略。
+如果首要构造器没有任何标注或者可视化修饰符，`constructor` 关键字可以省略。
 
 ```kotlin
 class Person(firstName: String) {
 }
 ```
+首要构造器不能包含任何代码。初始化代码可位于用 `init` 关键字作为前缀的**初始化区块（initializer block）**中。
 
-首要构造函数不能包含任何代码。初始化代码可位于**初始化区块（initializer block）**（`init` 关键字是前缀）。
-
-实例初始化过程中，初始化区块会按照他们声明的顺序进行初始化，中间可以穿插属性的初始化。
+一个实例在初始化的过程中，初始化区块会按照他们声明的顺序执行，中间可以穿插属性的初始化。
 
 ```kotlin
 class InitOrderDemo(name: String) {
@@ -51,7 +47,7 @@ class InitOrderDemo(name: String) {
 }
 ```
 
-注意：首要构造函数的参数可以直接用在初始化区块中。当然也可以用于属性初始化。
+注意：首要构造器的参数可以直接用于初始化区块。当然也可以用于属性初始化。
 
 ```kotlin
 class Customer(name: String) {
@@ -59,7 +55,7 @@ class Customer(name: String) {
 }
 ```
 
-实际上，有简洁的语法支持在首要构造函数中声明和初始化属性：
+实际上，有简洁的语法支持在首要构造器中声明属性并对他们进行初始化：
 
 ```kotlin
 class Person(val firstName: String, val lastName: String, val age: Int) {
@@ -67,17 +63,17 @@ class Person(val firstName: String, val lastName: String, val age: Int) {
 }
 ```
 
-和其他常规的属性一样，首要构造函数中的属性可以被声明为可变（`var`）或者只读（`val`）。
+和其他常规的属性一样，首要构造器中的属性可以被声明为可变（`var`）或者只读（`val`）。
 
-如果构造函数中有注解或者可见性修饰符，`constructor` 关键字是必要的，而且修饰符位于它之前：
+如果构造器中有注解或者可见性修饰符，必须要有 `constructor` 关键字，修饰符位于它前面：
 
 ```kotlin
 class Customer public @Inject constructor(name: String) { ... }
 ```
 
-### 次要构造函数
+**次要构造器**
 
-一个类也可以用 `constructor` 作为前缀来声明次要构造函数（secondary constructor）：
+一个类也可以用 `constructor` 作为前缀来声明次要构造器（secondary constructor）：
 
 ```kotlin
 class Person {
@@ -87,7 +83,7 @@ class Person {
 }
 ```
 
-如果一个类有首要构造函数，那么每个次要构造函数都需要调用到首要构造函数，方式可以是通过其他构造函数直接或者间接地发起调用。使用 `this` 关键字可以把调用代理到同一个类的其他构造函数：
+如果一个类有首要构造器，那么每个次要构造器都要代理到首要构造器，可以直接或者通过其他次要构造器间接实现。使用 `this` 关键字可以把调用代理到同一个类的其他构造器：
 
 ```kotlin
 class Person(val name: String) {
@@ -97,7 +93,7 @@ class Person(val name: String) {
 }
 ```
 
-注意：初始化区块里的代码会成为首要构造函数的一部分，次要构造函数会首先调用首要构造函数，因此初始化区块中的代码会优先执行。没有定义首要构造函数，对首要构造函数的调用会静默执行，所以初始化区块仍然会被执行到。
+注意：初始化区块里的代码会成为首要构造器的一部分。次要构造器的第一条语句会代理到首要构造器，因此初始化区块中的代码会优先执行。即使没有首要构造器，代理也会静默发生，所以初始化区块仍然会被执行到。
 
 ```kotlin
 class Constructors {
@@ -111,22 +107,20 @@ class Constructors {
 }
 ```
 
-如果一个非抽象的类没有定义任何构造函数（包括首要或者次要），会自动生成一个 public 的无参首要构造函数。如果不想要 public 构造函数，可以声明一个空的首要构造函数（不使用默认可见性）。
+如果一个非抽象的类没有声明任何构造器（首要或次要），那么它会自动生成一个 public 的无参首要构造器。如果不想要 public 构造器，可以声明一个非默认可见性并且空的首要构造器。
 
 ```kotlin
 class DontCreateMe private constructor () {
 }
 ```
 
-> 注意：在 JVM 上，如果首要构造函数的所有参数都有默认值，编译器额外会生成一个使用默认值的无参构造函数。这样可以方便 Jackson 或者 JPA 这样的库通过无参构造函数来创建类的实例。
-
+> 注意：在 JVM 上，如果首要构造器的所有参数都有默认值，编译器额外会生成一个使用默认值的无参构造器。这样可以方便 Jackson 或者 JPA 这样的库通过无参构造器来创建类的实例。
 ```kotlin
 class Customer(val customerName: String = "")
 ```
 
 ### 创建类的实例
-
-创建类实例时，可以像调用普通函数那样调用构造函数：
+创建类实例时，可以像调用普通函数那样调用构造器：
 
 ```kotlin
 val invoice = Invoice()
@@ -135,25 +129,25 @@ val customer = Customer("Joe Smith")
 
 注意，Kotlin 没有 `new` 关键字。
 
-### 类的成员
+创建嵌套、内部和匿名类的实例在“嵌套类”那一章节。
 
+### 类的成员
 一个类可以包含：
 
-* 构造函数和初始化区块
+* 构造器和初始化区块
 * 函数
 * 属性
 * 嵌套和内部类
 * 对象声明
 
 ## 继承
-
-Kotlin 中所有的类都有一个共同的父类 - `Any`，对于没有声明父类的类，`Any` 是默认父类。
+Kotlin 中所有的类都有一个共同的父类 - `Any`，对于没有声明父类，那么`Any` 就是默认父类。
 
 ```kotlin
 class Example // Implicitly inherits from Any
 ```
 
-`Any` 不是 `java.lang.Object`，它除了 `equals()`、`hashCode()` 和 `toString()` 之外，没有任何其他成员。
+> 注意： `Any` 不是 `java.lang.Object`，特别的是，它除了 `equals()`、`hashCode()` 和 `toString()` 之外，没有任何其他成员。
 
 如果要显示声明一个父类，需要把父类的类型放置在冒号之后：
 
@@ -163,9 +157,11 @@ open class Base(p: Int)
 class Derived(p: Int) : Base(p)
 ```
 
-如果一个类有首要构造函数，那么它的基类可以（并且必须）使用构造函数的参数在那个位置进行初始化。
+> 这里的 `open` 注解与 Java 的 `final` 正好相反：它允许这个类被继承。默认情况下，Kotlin 中所有的类都是 final，正好符合 Effective Java 的第 17 条：要么为继承而设计，并提供文档说明，要么就禁止继承。
 
-如果类没有首要构造函数，次要构造函数只能使用 `super` 关键字来初始化基类，或者调用另一个这么做的构造函数。这种情况下，不同的次要构造函数可以调用基类不同的构造函数。
+如果继承的类有首要构造器，那么它的基类可以（并且必须）使用首要构造器的参数在它出现的地方进行初始化。
+
+如果这个类没有首要构造器，那么每一个次要构造器必须使用 `super` 关键字来初始化基类，或者调用另一个实现了这个要求的构造器。注意，在这种情况下，不同的次要构造器可以调用不同的基类构造器。
 
 ```Kotlin
 class MyView : View {
@@ -175,23 +171,21 @@ class MyView : View {
 }
 ```
 
-注解 `open` 的作用与 Java 的 `final` 正好相反：它允许类可以被继承。Kotlin 所有的类默认都是 `final`，符合 Effect Java 的第 17 条：Design and document for inheritance or else prohibit it。
-
 ### 方法覆写
-
-就像前面提到的，我们倾向于明确标记。与 Java 不同的是，对于可覆写的成员（称之为 open）和重载的行为，Kotlin 需要用注解明确地标记：
+就像前面提到的，Kotlin 倾向于让事物变得明确。与 Java 不同的是，对于可覆写的成员（可被称之为 open）和覆写本身，Kotlin 需要用注解明确地标记：
 
 ```kotlin
 open class Base {
     open fun v() {}
     fun nv() {}
 }
+
 class Derived() : Base() {
     override fun v() {}
 }
 ```
 
-`override` 必须标记在 `Derived.v()` 上，否则会编译出错。如果函数没有 `open` 注解，像 `Base.nv()`，在子类中声明一个同样签名的方法是非法的，不管有没有用 `override`。final 类（没有 `open` 注解的类）不允许有 open 成员。
+`override` 必须标记在 `Derived.v()` 上，否则会导致编译出错。如果函数没有 `open` 注解，像 `Base.nv()`，在子类中声明一个同样签名的方法是非法的，不管有没有用 `override`。final 类（没有 `open` 注解的类）不允许有 open 成员。
 
 用 `override` 标注的成员自身是 open，也就是说，它可以在子类中被覆写。如果想禁止再被重载，可以使用 `final`：
 
@@ -202,8 +196,7 @@ open class AnotherDerived() : Base() {
 ```
 
 ### 属性覆写
-
-属性覆写的工作方式和方法重载类似，在父类中声明的属性，如果想要在子类中重新声明，必须使用 `override` 标注，并且类型必须兼容。每个声明的属性都可以被带初始化器或者带 getter 方法的属性重载掉。
+属性覆写的工作方式和方法覆写一样，在父类中声明的属性，如果想要在子类中重新声明，必须使用 `override` 标注，并且类型必须兼容。每个声明的属性都可以被覆写为自带初始化或者带有 getter 方法的属性。
 
 ```kotlin
 open class Foo {
@@ -215,9 +208,9 @@ class Bar1 : Foo() {
 }
 ```
 
-也可以用 `var` 属性来覆写 `val` 属性，反之亦然。可以这么做的原因是：`val` 属性本质上声明了一个 `getter` 方法，用 `var` 重载就等价于在子类中额外定义了一个 setter 方法。
+也可以用 `var` 属性来覆写 `val` 属性，但是反过来不可以。原因是：`val` 属性本质上声明了一个 `getter` 方法，用 `var` 覆写就等价于在继承的类中额外定义了一个 setter 方法。
 
-注意，`override` 可以用在首要构造函数的属性声明中。
+注意，`override` 可以用在首要构造器的属性声明中。
 
 ```kotlin
 interface Foo {
@@ -231,8 +224,31 @@ class Bar2 : Foo {
 }
 ```
 
-### 调用父类实现
+### 继承类的初始化顺序
+在构造一个继承类的实例时，完成基类的初始化是第一步（只在基类构造器参数的评估之后），因此要早于继承类执行它的初始化逻辑。
 
+```kotlin
+open class Base(val name: String) {
+    init { println("Initializing Base") }
+
+    open val size: Int = 
+    name.length.also { println("Initializing size in Base: $it") }
+}
+
+class Derived(
+    name: String,
+    val lastName: String
+) : Base(name.capitalize().also { println("Argument for Base: $it") }) {
+    init { println("Initializing Derived") }
+
+    override val size: Int = 
+    (super.size + lstName.length).also { println("Initializing size in Derived: $it") }
+}
+```
+
+这就意味着，基类构造器在执行时，继承类所声明或覆写的属性还没有被初始化。如果这些属性被用到了基类的初始化逻辑中（无论是直接还是间接地通过另一个覆写的 `open` 成员），可能会导致不正确的行为或者运行时失败。所以设计基类时，在构造器、属性初始化以及 `init` 块中要避免使用 `open` 成员。
+
+### 调用父类实现
 使用 `super` 关键字，子类中的代码可以调用父类的函数和属性访问器。
 
 ```kotlin
@@ -251,7 +267,7 @@ class Bar : Foo() {
 }
 ```
 
-内部类如果要访问外部类的父类，可以通过 `super` 加上外部类类名的方式访问：
+内部类如果要访问外部类的父类，访问方式是 `super` 再加上外部类类名：
 
 ```kotlin
 class Bar : Foo() {
@@ -268,8 +284,7 @@ class Bar : Foo() {
 ```
 
 ### 覆写规则
-
-在 Kotlin 中，实现继承要遵守如下原则：如果一个类间接的多个父类中继承了同一个成员的多个实现，它必须覆写这个成员并且提供自己的实现（也可以直接使用继承中的某一个）。我们可以采用用 `super` 加上尖括号包裹父类名字的方式来标记继承实现是来自哪个父类，例如，`super<Base>`。
+在 Kotlin 中，实现继承要遵守如下规则：如果一个类间接地从多个父类中继承了同一个成员的多个实现，那么它必须覆写这个成员并且提供自己的实现（也可以直接使用继承中的某一个）。我们可以采用用 `super` 加上尖括号包裹父类名字的方式来标记继承实现是来自哪个父类，例如，`super<Base>`。
 
 ```kotlin
 open class A {
@@ -291,12 +306,12 @@ class C() : A(), B {
 }
 ```
 
-同时继承 `A` 和 `B` 是没问题的，而且 `a()` 和 `b()` 也没有问题，因为 `C` 只继承了这些方法当中的一个实现。但是 `C` 继承了两个 `f()` 的实现，因此我们要在 `C` 中重写 `f()` 来提供我们自己的实现，这样才能排除二义性。
+可以同时继承 `A` 和 `B` ，`a()` 和 `b()` 也没有问题，因为 `C` 只继承了这些方法当中的一个实现。但是 `C` 继承了两个 `f()` 的实现，因此我们必须要在 `C` 中重写 `f()` 来提供我们自己的实现，这样才能排除二义性。
 
 ## 抽象类
-类和它的某些成员可以声明为 `abstract`。类的抽象成员没有实现。我们没必要用 open 来标注一个抽象类或者函数，因此这是显而易见（It goes without saying）。
+类和它的某些成员可以声明为 `abstract`。类的抽象成员没有实现。我们没必要用 open 来标注一个抽象的类或函数，因此这是显而易见（It goes without saying）。
 
-我们可以用抽象成员覆写非抽象的 open 成员。
+我们把非抽象的 open 成员覆写为抽象的：
 
 ```kotlin
 open class Base {
@@ -309,9 +324,8 @@ abstract class Derived : Base() {
 ```
 
 ## 联合对象
+与 Java 或者 C# 不同的是，Kotlin 的类没有静态方法。大部分情况下，推荐使用包级别的函数来替代。
 
-与 Java 或者 C# 不同的是，Kotlin 没有静态方法。大部分情况下，简单的替代做法是使用包级别的函数。
+如果我们需要写一个函数，这个函数可以不通过类的实例来调用，但是它需要访问到类本身的内部（例如，一个工厂方法），那么在那个类中将其写成一个对象声明类型的成员。
 
-如果我们需要一个不依赖与类实例、并且需要访问类的内部（例如，一个工厂方法），可以在类里面将其作为一个[对象声明](objects.md)的成员。
-
-更具体一点，如果在类中声明了一个联合对象，就可以使用像 Java/C# 静态方法那样的语法——只使用类名作为修饰词。
+更具体一点，如果在类中声明了一个联合对象，就可以使用像 Java/C# 静态方法那样的语法来调用它的成员——只使用类名作为限定符。
