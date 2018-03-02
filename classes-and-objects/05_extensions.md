@@ -1,6 +1,4 @@
-扩展
-===
-
+# 扩展
 Kotlin 可以无需依靠继承或设计模式来扩展一个类的功能，类似 C# 和 Gosu。这个能力通过一个叫 `extensions` 的特殊声明来实现。 Kotlin 支持扩展函数（extension functions）和扩展属性（extension properties）。
 
 扩展函数
@@ -106,6 +104,7 @@ C().caller(D1())    // prints "D.foo in C" - extension receiver is resolved virt
 
 动力
 ---
+
 Java 的世界中，我们习惯了以 “*Utils” 来命名工具类：`FileUtils`、`StringUtils` 等等。`java.util.Collections` 是一个典型，代码很容易变成下面的样子，让人不爽：
 
 ```java
