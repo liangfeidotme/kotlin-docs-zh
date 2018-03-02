@@ -1,8 +1,8 @@
- 见性修饰符
+# 可见性修饰符
 
-类、对象、接口、构造器、函数、属性以及它们的 setter 都有 *可见性修饰符*。（getter 的可见性与属性一直）。Kotlin 中有四个可见性修饰符：`private`、`protected`、`internal` 和 `public`。默认的可见性（如果没有显示指明修饰符）是 `public`。
+类、对象、接口、构造器、函数、属性以及它们的 setter 都有 *可见性修饰符*。（getter 的可见性与属性一致）。Kotlin 中有四个可见性修饰符：`private`、`protected`、`internal` 和 `public`。默认的可见性（如果没有显示指明修饰符）是 `public`。
 
-下面会关于修饰符如何可作用于不同类型声明域的解释。
+下面会解释修饰符如何作用于不同类型的声明域（different types of declaring scopes）。
 
 ## 包
 函数、属性，类、对象以及接口可以声明在“最顶层”，也就是说，直接在包内。
@@ -18,9 +18,9 @@ class Bar {}
 - 如果没有指明任何可见性修饰符，默认为 `public`，意味着你的定义在任何地方都是可见的。
 - 如果用 `private` 来标记声明，那么只在声明所在的文件内可见。
 - 如果标记为 `internal`，只要是同一个模块，都可见。
-- `protected` 对于底层声明不可用。
+- `protected` 对于顶层声明不可用。
 
-注意：如果要是用其他包的可见顶层声明，任然需要导入。
+注意：如果要使用其他包的可见顶层声明，任然需要导入。
 
 例子：
 
@@ -37,7 +37,6 @@ internal val baz = 6    // visible inside the same module
 ```
 
 ## 类和接口
-
 对于声明在类中的成员：
 
 - `private` 意味着只在这个类中可见（包含类所有的成员）；
@@ -95,5 +94,5 @@ class C private constructor(a: Int) { ... }
 
 - 一个 IntelliJ IDEA 模块；
 - 一个 Maven 工程；
-- 一个 Gradle source set；
+- 一个 Gradle source set（有一个例外，`test` 代码集合可以访问 `main` 的内部声明）；
 - 通过调用一次 Ant 任务编译的文件集合

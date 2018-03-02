@@ -89,7 +89,7 @@ var setterWithAnnotation: Any? = null
 ```
 
 ## 备份字段
-字段可以直接声明在 Kotlin 类中。但是，当属性需要备份字段时，Koltin 会自动提供。在访问器中可以通过 `field` 标识符来引用备份字段：
+Kotlin 类中无法直接声明字段。但是，当属性需要备份字段时，Koltin 会自动提供。在访问器中可以通过 `field` 标识符来引用备份字段：
 
 ```kotlin
 var counter = 0 // the initializer value is written directly to the backing field
@@ -98,7 +98,7 @@ var counter = 0 // the initializer value is written directly to the backing fiel
     }
 ```
 
-`field` 标识符只能用于属性的访问器中。
+`field` 标识符只能用在属性的访问器中。
 
 备份字段的生成需要属性满足一定的条件：备份字段使用了至少一个访问器的默认实现，或者，自定义访问器通过 `field` 标识符来引用它。
 
@@ -110,7 +110,6 @@ val isEmpty: Boolean
 ```
 
 ## 备份属性
-
 如果你不想落入“隐式备份字段”的窠臼，可以退而求其次，使用备份属性：
 
 ```kotlin
@@ -133,6 +132,7 @@ public val table: Map<String, Int>
 * 没有自定义 getter
 
 这些属性可用于注解：
+
 ```kotlin
 const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 
