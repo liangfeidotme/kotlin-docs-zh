@@ -1,9 +1,6 @@
-函数
-===
+# 函数
 
-函数声明
----
-
+## 函数声明
 Kotlin 使用关键词 `fun` 声明一个函数：
 
 ```kotlin
@@ -12,23 +9,21 @@ fun double(x: Int): Int {
 }
 ```
 
-函数使用
----
-
-普通函数调用方式（the traditional approach）：
+## 函数使用
+普通的函数调用方式：
 
 ```kotlin
 val result = double(2)
 ```
 
-成员函数调用方式（the dot notation）：
+使用点号调用成员函数：
 
 ```kotlin
 Sample().foo()  // create instance of class Sample and call foo
 ```
-### 参数
 
-参数的定义符合 **Pascal notation**，例如：`name: type`。参数之间通过都好分隔，每个参数都必须指明类型。
+### 参数
+函数参数的定义使用帕斯卡符号——`name: type`。参数之间通过逗号分隔。每个参数都必须指明类型。
 
 ```kotlin
 fun powerOf(number: Int, exponent: Int) {
@@ -37,8 +32,7 @@ fun powerOf(number: Int, exponent: Int) {
 ```
 
 ### 默认参数
-
-函数参数可以有默认值，因此调用时可以省略对应的参数。这样可以减少函数重载。
+函数参数可以有默认值，因此调用时可以省略对应的参数。与其他语言相比，这样可以减少函数重载。
 
 ```kotlin
 fun read(b: Array<Byte>, off: Int = 0, len: Int = b.size) {
@@ -48,7 +42,7 @@ fun read(b: Array<Byte>, off: Int = 0, len: Int = b.size) {
 
 默认值定义在类型右侧的 `=` 之后。
 
-重写函数总是使用同样的默认参数。所以重写一个带默认参数的函数时，函数签名中必须要删除默认值：
+覆写的方法总是与父类方法使用相同的默认参数。所以覆写一个带默认参数值的方法时，函数签名中必须要去掉默认值：
 
 ```kotlin
 open class A {
@@ -61,7 +55,7 @@ class B : A {
 }
 ```
 
-如果默认参数后面的参数没有默认值，只能通过命名参数（named arguments）的方式使用默认值：
+如果一个默认参数位于没有默认值的参数之前，默认值值能通过命名参数的形式使用。
 
 ```kotlin
 fun foo(bar: Int = 0, baz: Int) { /* ... */ }
@@ -70,7 +64,7 @@ fun foo(bar: Int = 0, baz: Int) { /* ... */ }
 foo(baz = 1)
 ```
 
-如果把 lambda 作为最后一个参数传递给函数（位于圆括号之外），默认参数无需传值：
+如果 lambda 在圆括号之外作为最后一个参数传递给函数，默认参数无需传值：
 
 ```kotlin
 fun foo(bar: Int = 0, baz: Int = 1, qux: () -> Unit) { /* ... */ }
@@ -80,8 +74,7 @@ foo() { println("hello") } // Uses the default value bar = 0 and baz = 1
 ```
 
 ### 命名参数
-
-函数调用时可以指定参数名。当函数有很多参数或者带默认参数时，这个特性很方便。
+函数调用时可以使用参数名。当函数有很多参数或者带默认参数时，这个特性很方便。
 
 例如下面的函数：
 
@@ -95,7 +88,7 @@ fun reformat(str: String,
 }
 ```
 
-可以用默认默认值调用：
+可以用默认参数调用：
 
 ```kotlin
 reformat(str)
@@ -137,7 +130,6 @@ foo(strings = *arrayOf("a", "b", "c"))
 注意，命名参数的语法无法用于 java 函数，因为 Java 字节码不一定保有参数名。
 
 ### 返回 Unit 的函数
-
 如果函数的返回值无用，返回值类型可以为 `Unit`。`Unit` 类型只有一个值 - `Unit`。无需显示返回这个值。
 
 ```kotlin
@@ -173,7 +165,7 @@ fun double(x: Int) = x * 2
 ```
 
 ### 显示的返回类型
-有 block body 的函数必须显示指明返回值类型，除非返回 `Unit`。Kotlin 不会推测返回值类型，因为函数体的控制逻辑可能比较复杂，返回值类型不明显。
+有块体（block body）的函数必须显示指明返回值类型，除非返回 `Unit`。Kotlin 不会推导带块体的函数返回值类型，因为这类函数的控制逻辑可能比较复杂，返回值类型对（甚至是编译器）来说不明显。
 
 ### 可变参数（Varargs）
 函数参数（通常是最后一个）可用 `vararg` 修饰：
@@ -197,7 +189,7 @@ val list = asList(1, 2, 3)
 
 `vararg` 只能标记于一个参数，如果这个参数不是参数列表的最后一个，那么它之后的参数可以通过命名参数的语法传值，或者，如果参数是函数类型，可以在括号之外传递一个 lambda。
 
-调用 `vararg` 函数是，可以一个一个传参，例如，`asList<1, 2, 3>`，或者，如果要传递一个数组的内容，可以用 `spread` 操作符（数组前面加个 `*`）：
+调用 `vararg` 函数时，可以一个一个传参，例如，`asList<1, 2, 3>`，或者，如果要传递一个数组的内容，可以用 `spread` 操作符（数组前面加个 `*`）：
 
 ```kotlin
 val a = arrayOf(1, 2, 3)
@@ -205,14 +197,13 @@ val list = asList(-1, 0, *a, 4)
 ```
 
 ### 中缀符号（infix notation）
-当满足如下条件时，可以使用中缀符号调用函数：
+用 `infix` 关键字标记的函数可以使用中缀符号调用（调用可省略点号和参数）。中缀函数需要满足如下条件：
 
-- 函数是成员函数或扩展函数
-- 函数只有一个参数
-- 函数用 `infix` 标记
+- 函数是成员函数或扩展函数；
+- 函数只有一个参数；
+- 参数不能接受可变数量的参数并且不能拥有默认值。
 
 ```kotlin
-// Define extension to Int
 infix fun Int.shl(x: Int): Int {
     // ...
 }
@@ -224,12 +215,39 @@ infix fun Int.shl(x: Int): Int {
 1.shl(2)
 ```
 
-函数 Scope
 ---
+
+中缀函数调用的优先级低于算术运算符、类型转换和 `rangeTo` 操作符。例如下面的等价表达式：
+
+- 1 shl 2 + 3 and 1 shl (2 + 3)
+- 0 until n * 2 and 0  until (n * 2)
+- xs union ys as Set<*> and xs union (ys as Set<*>)
+
+另一方面，中缀函数调用的优先级要高于布尔运算 && 和 ||，is 和 in 检查，以及其他操作符。例如下面的等价表达式：
+
+- a && b xor c and a && (b xor c)
+- a xor b in c and (a xor b) in c
+
+注意，使用中缀函数必须指明接收者和参数。如果在当前接收者上使用中缀符号，需要显示使用 `this`；与正常函数不同，它没法省略掉。这么做是为了保证无歧义解析。
+
+```kotlin
+class MyStringCollection {
+    infix fun add(s: String) { /* ... */ }
+
+    fun build() {
+        this add "abc"  // Correct
+        add("abc")      // Correct
+        add "abc"       // Incorrect: the receiver must be specified
+    }
+}
+```
+
+---
+
+## 函数范围
 Kotlin 的函数可以直接定义在代码文件的最外层，也就是说，无需像 Java、C# 或 Scala 那样必须把函数定义在类里面。初此之外，Kotlin 的函数可以声明为本地函数、成员函数和扩展函数。
 
 ### 局部函数
-
 Kotlin 支持本地函数，也就是说，函数可以嵌套。
 
 ```kotlin
@@ -244,7 +262,7 @@ fun dfs(graph: Graph) {
 }
 ```
 
-局部函数可以方位外部函数（闭包）的局部变量，所以，上例中的 `visited` 可用局部变量表示：
+局部函数可以访问外部函数（即：闭包）的局部变量，所以，上例中的 `visited` 可用局部变量表示：
 
 ```kotlin
 fun dfs(graph: Graph) {
@@ -261,7 +279,6 @@ fun dfs(graph: Graph) {
 ```
 
 ### 成员函数
-
 成员函数定义在类或者对象的内部：
 
 ```kotlin
@@ -270,17 +287,16 @@ class Sample() {
 }
 ```
 
-成员函数通过点来调用：
+成员函数通过点符号来调用：
 
 ```kotlin
 Sample().foo()  // creates instance of class Sample and calls foo
 ```
 
-更多关于类和重写的姿势可参考 [类和继承](classes-and-objects/classes-and-inheritance.md)。
+更多关于类和重写的姿势可参考**类和继承**。
 
-泛型函数
----
-函数可以有泛型参数，用尖括号表示：
+## 泛型函数
+函数可以有泛型参数，用尖括号指定，位于函数名之前：
 
 ```kotlin
 fun <T> singletonList(item: T) List<T> {
@@ -288,29 +304,24 @@ fun <T> singletonList(item: T) List<T> {
 }
 ```
 
-内联函数
----
-请前往[内联函数](functions-and-lambdas/inline-functions.md)。
+## 内联函数
+可见**内联函数**章节。
 
-扩展函数
----
-请前往[扩展函数](classes-and-objects/extensions.md)。
+## 扩展函数
+可见**扩展**章节。
 
-高阶函数和 lambda
----
-请前往[高阶函数和lambda](functions-and-lambdas/lambdas.md)。
+## 高阶函数和 lambda
+可见**高阶函数和lambda**章节。
 
-尾递归函数（Tail recursive functions）
----
-
-Kotlin 支持函数式编程的[尾递归](https://en.wikipedia.org/wiki/Tail_call)，尾递归可以代替循环来实现某些算法，而且不会导致栈溢出。当一个函数用 `tailrec` 来修饰并且满足形式，编译器会把递归调用优化成一个快速且高效的循环。
+## 尾递归函数（Tail recursive functions）
+Kotlin 支持函数式编程的[尾递归](https://en.wikipedia.org/wiki/Tail_call)，尾递归可以代替循环来实现某些算法，而且不会导致栈溢出。当一个函数用 `tailrec` 来修饰并且满足所需的形式时，编译器会把递归调用优化成一个快速且高效的循环。
 
 ```kotlin
 tailrec fun findFixPoint(x: Double = 1.0): Double
     = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
 ```
 
-上面的代码用于计算一个数学常量 —— cosine 的 fixpoint。实现方式只是一直调用 `Math.cos` 直到计算结果不再变，最后产生的值是 0.7390851332151607。以上代码的传统的写法如下：
+上面的代码用于计算一个数学常量 —— cosine 的 fixpoint。实现方式是一直调用 `Math.cos` 直到计算结果不再改变，最后产生的值是 0.7390851332151607。以上代码的传统写法如下：
 
 ```kotlin
 private fun findFixPoint(): Double {
