@@ -103,7 +103,11 @@ Github 源码：https://github.com/JetBrains/kotlin/blob/master/libraries/stdlib
 ## 协程的内部工作机制
 这里不会给出关于协程底层如何工作的完整解释，但是一个粗略的认识会比较重要。
 
-协程的实现完全依靠编译器技术（无需 VM 或 OS 的支持），而且挂起通过代码转换实现。基本上，每个挂起函数（可能有优化，这里不赘述）都会转换成一个状态机，它的状态对应着挂起的调用。下一个状态
+协程的实现完全依靠编译器技术（无需 VM 或 OS 的支持），而且挂起通过代码转换实现。基本上，每个挂起函数（可能有优化，这里不赘述）都会转换成一个状态机，它的状态对应着挂起的调用。正好的挂起之前，下一个状态连带相关的局部变量等会存储在由编译器生成的类的某个字段中。在协程恢复时，局部变量会复原，状态机会从正好位于挂起之后的那个状态处继续往下处理。
+
+一个挂起的协程可以作为一个对象被存储以及来回传递，这个对象能够保持挂起的状态和局部环境。这类对象的类型是 `Continuation`，并且这里所描述的所有代码转换都对应着经典的 [CPS(Continuation-Passing Style)](https://en.wikipedia.org/wiki/Continuation-passing_style)。因此，挂起函数的底层其实携带了一个类型是 `Continuation` 的额外参数。
+
+更多关于协程的详细内容可以在在[设计文档](https://github.com/Kotlin/kotlin-coroutines/blob/master/kotlin-coroutines-informal.md)中找到。有关其他语言（例如 C# 或者 ECMAScript 2016）中 async/await 的描述在这里也是相关的，即使它们实现的语言特性不一定像 Kotlin 的协程那样通用。
 
 ## 协程的实验性状态
 协程的设计是实验性的，未来可能会有变化。Kotlin 1.1+ 的协程在编译时默认会报警告：*“协程”这个特性是实验性的*。如果要移除这个警告，需要指定一个 opt-in 的标志。
