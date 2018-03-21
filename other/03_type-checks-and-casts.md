@@ -126,4 +126,37 @@ val stringToStringList = somePair.asPairOf<String, List<String>>()
 ## 未检查的转换
 如上所述，类型擦除使得在运行时检查泛型实例的实际类型形参变得不可能，而且代码中的泛型类型由于彼此连接得不太紧密，编译器也无法确保类型安全。
 
-即便如此，我们高级的程序逻辑来应用
+即便如此，我们可以在高级程序逻辑里隐含类型安全来作为替代方案。
+
+```kotlin
+fun readDictionary(file: File): Map<String, *> = 
+    file.inputStream().use {
+        TODO("Read a mapping of strings to arbitrary elements.")
+    }
+
+    // We saved a map with `Int`s into that file
+    val insFile = File("ints.dictionary")
+
+    // Warning: Unchecked cast: `Map<String, *>` to `Map<String, Int>`
+    val intsDictionary: Map<String, Int> = 
+        readDictionary(intsFile) as Map<String, Int>
+```
+
+编译器会对代码最后一行发出警告。类型转换无法在运行时做检查而且不能保证 map 的值是 `Int`。
+
+为了避免未检查的转换，我们可以重新设计程序结构：在上面的例子中，可以使用接口 `DictionaryReader<T>` 和 `DictionaryWriter<T>`，它们可以实现不同类型的类型安全。也可以基于合理的抽象把未检查的转换从调用代码的形式转移到实现细节中。泛型变形的合理使用会有所帮助。
+
+对于泛型函数来说，使用具体化的类型参数能够使 `arg as T` 这样的转换在运行时被检查，除非 `arg` 的类型有*它自己*的类型参数（会被擦除）。
+
+如果要取消对未检查的转化所发出的警告，可以把 `@Suppress("UNCHECKED_CAST")` 标记在声明或表达式上。
+
+```kotlin
+inline fun <reified T> List<*>.asListOfType():
+List<T>? = 
+    if (all { it is T })
+        @Suppress("UNCHECKED_CAST")
+        this as List<T> else
+        null
+```
+
+在 JVM 中，数组类型（`Array<Foo>`）会保持被擦除的元素类型的信息，变到数组类型的转化也会有部分检查：可空性，元素类型本身的时机类型实参任然会被擦除。例如，对于 `foo as Array<List<String>?>` 这种转换，如果 `foo` 是一个携带了任意 `List<*>` 的数组，无论是否为空，转换都会成功。
