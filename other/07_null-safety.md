@@ -1,5 +1,4 @@
 # Null 安全
-
 Kotlin 类型系统旨在从源码层面消除 null 引用的风险（十亿美金的错误）。
 
 很多其他编程语言（包括 Java）最常见的一个缺陷是：访问 null 引用的成员时会导致 null 引用异常。Java 世界里的 `NullPointerException`，简称 NPE。
@@ -14,7 +13,7 @@ Kotlin 类型系统旨在从源码层面排除 `NullPointerException`。所有�
 * 与 Java 的互操作
     * 尝试访问 `null` 引用（平台类型）的成员；
     * 使用泛型做互操作性时，可空性处理不正确，例如，Java 代码可能给 Kotlin 的 `MutableList<String>` 新增一个 `null` 变量，正确的做法应该使用 `MutableList<String?>`。
-    * 其他由外部 java 代码引起的问题；
+    * 其他由外部 Java 代码引起的问题；
 
 Kotlin 的类型系统会明确区分可空和不可空。例如，常规的 `String` 类型变量不能够为空：
 
@@ -45,7 +44,6 @@ val l = b.length // error: variable 'b' can be null
 但是，我们依然要访问那个属性，下面介绍了几种访问方式。
 
 ## 在条件表达式中检查 `null`
-
 首先，可以显示地去检查 `b` 是否为空，然后分别处理两种选项：
 
 ```kotlin
