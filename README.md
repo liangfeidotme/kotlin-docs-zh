@@ -27,7 +27,7 @@
 * [函数](functions-and-lambdas/01_functions.md)
 * [Lambda](functions-and-lambdas/02_lambdas.md)
 * [内联函数](functions-and-lambdas/03_inline-functions.md)
-* [-协程](functions-and-lambdas/04_coroutines.md)
+* [协程](functions-and-lambdas/04_coroutines.md)
 
 ## 其他
 * [解构声明](other/00_destructuring-declarations.md)
@@ -43,42 +43,3 @@
 * [反射](other/10_reflection.md)
 * [类型安全构造器](other/11_type-safe-builders.md)
 * [类型别名](other/12_type-aliases.md)
-* [多平台工程](other/13_multiplatform-projects.md)
-
-核心库
----
-* [标准库](core-libraries/00_standard-library)
-* [测试](core-libraries/01_kotlin-test.md)
-
-引用
----
-* [关键字和操作符](reference/00_keywords-and-operators.md)
-* [语法](reference/01_grammer.md)
-* [兼容性](reference/02_compatibility.md)
-
-Java互操作
----
-* [Kotlin调Java](java-interop/00_calling-java-from-kotlin.md)
-* [Java调Kotlin](java-interop/01_calling-kotlin-from-java.md)
-
-JavaScript
----
-* [动态类型](javascript/00_dynamic-type.md)
-* [Kotlin调用JavaScript](javascript/01_calling-javascript-from-kotlin.md)
-* [JavaScript调用Kotlin](javascript/02_calling-kotlin-from-javascript.md)
-* [JavaScript模块](javascript/03_javascript-modules.md)
-* [JavaScript DEC](javascript/04_javascript-dce.md)
-
-Tools
----
-* [注释文档](tools/00_documenting-kotlin-code.md)
-* [使用Kapt](tools/01_using-kapt.md)
-* [使用Gradle](tools/02_using-gradle.md)
-* [使用Ant](tools/03_using-ant.md)
-* [Kotlin和OSGi](tools/04_kotlin-and-osgi.md)
-* [编译器插件](tools/05_compiler-plugins.md)
-
-FAQ
----
-* [FAQ](faq/00_faq.md)
-* [与Java的比较](faq/01_comparison-to-java.md)
