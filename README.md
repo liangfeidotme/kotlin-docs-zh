@@ -13,7 +13,7 @@
 * [属性和字段](classes-and-objects/01_properties-and-fields.md)
 * [接口](classes-and-objects/02_interfaces.md)
 * [可见性修饰符](classes-and-objects/03_visibility-modifiers.md)
-* [扩展](classes-and-objects/05_extensions.md)
+* [扩展](classes-and-objects/04_extensions.md)
 * [数据类](classes-and-objects/05_data-classes.md)
 * [密封类](classes-and-objects/06_sealed-classes.md)
 * [泛型](classes-and-objects/07_generics.md)
