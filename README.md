@@ -37,12 +37,12 @@
 * [this表达式](other/04_this-expressions.md)
 * [相等比较](other/05_equality.md)
 * [操作符重载](other/06_operator-overloading.md)
-* [null安全](other/07_null-safty.md)
+* [null安全](other/07_null-safety.md)
 * [异常](other/08_exceptions.md)
 * [标记](other/09_annotations.md)
 * [反射](other/10_reflection.md)
 * [类型安全构造器](other/11_type-safe-builders.md)
-* [类型别名](other/12_type-alias.md)
+* [类型别名](other/12_type-aliases.md)
 * [多平台工程](other/13_multiplatform-projects.md)
 
 核心库
