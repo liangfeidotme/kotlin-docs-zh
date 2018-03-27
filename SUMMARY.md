@@ -32,7 +32,7 @@
     * [操作符重载](other/06_operator-overloading.md)
     * [null安全](other/07_null-safety.md)
     * [异常](other/08_exceptions.md)
-    * [标记](other/09_annotations.md)
+    * [注解](other/09_annotations.md)
     * [反射](other/10_reflection.md)
     * [类型安全构造器](other/11_type-safe-builders.md)
     * [类型别名](other/12_type-aliases.md)
