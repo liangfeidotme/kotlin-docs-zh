@@ -88,8 +88,8 @@ var setterWithAnnotation: Any? = null
     @Inject set // annotate the setter with Inject
 ```
 
-## 备份字段
-Kotlin 类中无法直接声明字段。但是，当属性需要备份字段时，Koltin 会自动提供。在访问器中可以通过 `field` 标识符来引用备份字段：
+## 幕后字段
+Kotlin 类中无法直接声明字段。但是，当属性需要幕后字段时，Koltin 会自动提供。在访问器中可以通过 `field` 标识符来引用幕后字段：
 
 ```kotlin
 var counter = 0 // the initializer value is written directly to the backing field
@@ -100,9 +100,9 @@ var counter = 0 // the initializer value is written directly to the backing fiel
 
 `field` 标识符只能用在属性的访问器中。
 
-备份字段的生成需要属性满足一定的条件：备份字段使用了至少一个访问器的默认实现，或者，自定义访问器通过 `field` 标识符来引用它。
+幕后字段的生成需要属性满足一定的条件：幕后字段使用了至少一个访问器的默认实现，或者，自定义访问器通过 `field` 标识符来引用它。
 
-例如，下面这个 case 就不会生成备份字段：
+例如，下面这个 case 就不会生成幕后字段：
 
 ```kotlin
 val isEmpty: Boolean
@@ -110,7 +110,7 @@ val isEmpty: Boolean
 ```
 
 ## 备份属性
-如果你不想落入“隐式备份字段”的窠臼，可以退而求其次，使用备份属性：
+如果你不想落入“隐式幕后字段”的窠臼，可以退而求其次，使用备份属性：
 
 ```kotlin
 private var _table: Map<String, Int>? = null
@@ -166,6 +166,6 @@ public class MyTest {
 可见[属性覆写](classes-and-inheritance.md#属性覆写)章节。
 
 ## 代理属性
-最常见的属性只是简单读取（或者写入）一个备份字段。从另一方面来说，利用自定义 getter 和 setter，我们可以实现一个属性的任意行为。介乎两者之间存在着一些属性如何工作的通过用模式。可以举几个例子：lazy value，通过给定的 key 读取 map 值，访问数据库，通知访问的监听器，等等。
+最常见的属性只是简单读取（或者写入）一个幕后字段。从另一方面来说，利用自定义 getter 和 setter，我们可以实现一个属性的任意行为。介乎两者之间存在着一些属性如何工作的通过用模式。可以举几个例子：lazy value，通过给定的 key 读取 map 值，访问数据库，通知访问的监听器，等等。
 
 这些共同的行为可以基于[代理属性](delegated-properties.md)封装成库。
