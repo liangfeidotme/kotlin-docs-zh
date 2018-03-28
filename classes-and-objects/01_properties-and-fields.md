@@ -33,7 +33,7 @@ var <propertyName>[: <PropertyType>] [= <property_initializer>]
     [<setter>]
 ```
 
-initializer、getter 和 setter 是可选的。类型如果能从 initializer 或者返回值中推导得出，也可以省略。
+initializer、getter 和 setter 是可选的。属性类型如果能从 initializer 或者 getter 的返回值中推导得出，也可以省略。
 
 例如：
 
@@ -78,7 +78,7 @@ var stringRepresentation: String
 val isEmpty get() = this.size == 0 // has type Boolean
 ```
 
-如果需要改变访问器的可见性或者添加注解，但是并不需要改变它的实现，可以直接定义访问器，并不需要 body。
+如果需要改变访问器的可见性或者添加注解，但是并不需要改变它的实现，可以直接定义访问器，并不需要具体实现。
 
 ```kotlin
 var setterVisiblity: String = "abc"
@@ -109,8 +109,8 @@ val isEmpty: Boolean
     get() = this.size == 0
 ```
 
-## 备份属性
-如果你不想落入“隐式幕后字段”的窠臼，可以退而求其次，使用备份属性：
+## 幕后属性
+如果你不想落入“隐式幕后字段”的窠臼，可以退而求其次，使用*幕后属性*：
 
 ```kotlin
 private var _table: Map<String, Int>? = null
@@ -162,10 +162,21 @@ public class MyTest {
 
 在初始化之前访问一个 `lateinit` 属性会抛出一个特定的异常，这个异常会指明被访问的属性并且会说明它还没有被初始化。
 
+### 检查一个 lateinit var 是否被初始化（1.2 开始支持）
+为了检查一个 `lateinit var` 是否已经被初始化，可以在那个属性的引用上使用 `.isInitialized`：
+
+```kotlin
+if (foo::bar.isInitialized) {
+    println(foo.bar)
+}
+```
+
+这个检查只对词法上可访问的属性有用，例如，声明在同一个类型或者外部类型中，或者位于同一个文件的顶部。
+
 ## 覆写属性
-可见[属性覆写](classes-and-inheritance.md#属性覆写)章节。
+可见[属性覆写](00_classes-and-inheritance.md#属性覆写)章节。
 
 ## 代理属性
-最常见的属性只是简单读取（或者写入）一个幕后字段。从另一方面来说，利用自定义 getter 和 setter，我们可以实现一个属性的任意行为。介乎两者之间存在着一些属性如何工作的通过用模式。可以举几个例子：lazy value，通过给定的 key 读取 map 值，访问数据库，通知访问的监听器，等等。
+最常见的属性只是简单地读取（或者写入）一个幕后字段。从另一方面来说，利用自定义 getter 和 setter，我们可以实现一个属性的任意行为。介乎两者之间还存在着一些属性如何工作的通用模式。可以举几个例子：lazy value，通过给定的 key 读取 map 值，访问数据库，通知访问的监听器，等等。
 
-这些共同的行为可以基于[代理属性](delegated-properties.md)封装成库。
+这些共同的行为可以基于[代理属性](12_delegated-properties.md)封装成库。
