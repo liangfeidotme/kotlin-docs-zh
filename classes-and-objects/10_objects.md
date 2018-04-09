@@ -49,7 +49,7 @@ fun foo() {
 class C {
     // Private function, so the return type is the annoymouse object type
     private fun foo() = object {
-        val x: String "x"
+        val x: String = "x"
     }
 
     // Public function, so the return type is Any
