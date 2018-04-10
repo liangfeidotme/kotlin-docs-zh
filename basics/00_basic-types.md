@@ -67,7 +67,7 @@ val anotherBoxedA: Int? = a
 print(boxedA == anotherBoxedA) // Prints 'true'
 ```
 
-### 隐式转换
+### 显示转换
 由于不同的表现形式，小类型并非大类型的子类型。如果是的话，可能会带来如下麻烦：
 
 ```kotlin
