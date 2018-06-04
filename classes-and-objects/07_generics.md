@@ -281,3 +281,13 @@ Kotlin 为泛型声明的用法所执行的类型安全检查只在编译期时�
 
 * type parameter：类型参数（形参）
 * type argument：类型实参
+
+---
+
+关于变形修饰符（variance modifider）的解释可参考 [Kotlin generic variance modifiers](https://blog.kotlin-academy.com/kotlin-generics-variance-modifiers-36b82c7caa39)：
+
+> When a generic type is invariant, like class `Box<T>`, there is no relation between any `Box<SomeType>` and `Box<AnotherType>`. So there is no relation between `Box<Number>` and `Box<Int>`.
+
+> When a generic type is covariant, like class `Box<out T>`, when A is a subtype of B then `Box<A>` is a subtype of `Box<B>`. So `Box<Int>` is a subtype of `Box<Number>`.
+
+> When a generic type is contravariant, like class `Box<in T>`, when A is a subtype of B then `Box<B>` is a subtype of `Box<A>`. So `Box<Number>` is a subtype of `Box<Int>`.
