@@ -121,7 +121,7 @@ val x = (1 shl 2) and 0x000FF000
 
 * `shl(bits)` - 有符号左移（Java 的 `<<`）
 * `shr(bits)` - 有符号右移（Java 的 `>>`）
-* `ushr(bits)` - 无符号左移（Java 的 `<<<`）
+* `ushr(bits)` - 无符号右移（Java 的 `>>>`）
 * `and(bits)` - 位的与运算
 * `or(bits)` - 位的或运算
 * `xor(bits)` - 位的异或运算
