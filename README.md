@@ -7,8 +7,7 @@
 ## 微信公众号
 
 欢迎关注「**老梁写代码**」
-
-![](https://cdn.nlark.com/yuque/0/2019/png/124977/1559045910714-8948c8b2-2b86-44a3-a600-a4415db3c01f.png)
+<img src="https://cdn.nlark.com/yuque/0/2019/png/124977/1559045910714-8948c8b2-2b86-44a3-a600-a4415db3c01f.png" width=400px />
 
 ## 许可协议
 [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
