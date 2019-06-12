@@ -5,6 +5,9 @@
 * 👍[前往Gitbook地址](https://www.gitbook.com/read/book/lyndonchin/kotlin-docs-zh)
 
 ## 微信公众号
+
+欢迎关注「**老梁写代码**」
+
 ![](https://cdn.nlark.com/yuque/0/2019/png/124977/1559045910714-8948c8b2-2b86-44a3-a600-a4415db3c01f.png)
 
 ## 许可协议
