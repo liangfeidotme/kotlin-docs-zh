@@ -5,7 +5,7 @@
 * 👍[前往Gitbook地址](https://www.gitbook.com/read/book/lyndonchin/kotlin-docs-zh)
 
 ## 微信公众号
-![](https://wx2.sinaimg.cn/mw690/63934de3gy1fpdr77kb6kj209k09kjrc.jpg)
+![](https://cdn.nlark.com/yuque/0/2019/png/124977/1559045910714-8948c8b2-2b86-44a3-a600-a4415db3c01f.png)
 
 ## 许可协议
 [署名-非商业性使用-相同方式共享 4.0 国际](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
